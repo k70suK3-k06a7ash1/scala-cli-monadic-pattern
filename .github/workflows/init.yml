@@ -30,6 +30,11 @@ jobs:
       - name: Compile
         run: scala-cli compile ./src
 
+      # LoanPattern : functional programing
+      - name: Run Scala script
+        run: scala-cli run src/feature/LoanPattern.scala
+
+
       # PhantomType : functional programing
       - name: Run Scala script
         run: scala-cli run src/feature/PhantomType.scala
