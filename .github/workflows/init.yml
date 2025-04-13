@@ -32,15 +32,15 @@ jobs:
 
       # 3. Products : functional programing
       - name: Run Scala script
-        run: scala-cli run Products.scala
+        run: scala-cli run src/monad/Products.scala
 
       # 4. Maybe Monad
       - name: Rust Scala Monad
-        run: scala-cli run MaybeMonad.scala
+        run: scala-cli run src/monad/MaybeMonad.scala
 
       # 5. State Monad
       - name: Rust Scala Monad
-        run: scala-cli run StateMonad.scala
+        run: scala-cli run src/features/StateMonad.scala
 
       - name: Test
         run: scala-cli test .
