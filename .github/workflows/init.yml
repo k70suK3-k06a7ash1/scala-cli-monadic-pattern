@@ -30,15 +30,19 @@ jobs:
       - name: Compile
         run: scala-cli compile ./src
 
-      # 3. Products : functional programing
+      # PhantomType : functional programing
+      - name: Run Scala script
+        run: scala-cli run src/feature/PhantomType.scala
+
+      # Products : functional programing
       - name: Run Scala script
         run: scala-cli run src/feature/Products.scala
 
-      # 4. Maybe Monad
+      # Maybe Monad
       - name: Rust Maybe Monad
         run: scala-cli run src --main-class runMaybeMonad
 
-      # 5. State Monad
+      # State Monad
       - name: Rust State Monad
         run: scala-cli run src --main-class runStateMonad
 
