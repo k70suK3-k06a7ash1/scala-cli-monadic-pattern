@@ -1,37 +1,5 @@
 import shared.*
 
-// --- 3. Maybe 用の Monad インスタンスの実装 ---
-// Maybe 型コンストラクタに対する Monad トレイトの実装を提供します。
-object MaybeMonad extends Monad[Maybe] {
-
-  /**
-   * 値を Just でラップして Maybe モナドに持ち上げます。
-   */
-  override def pure[A](value: A): Maybe[A] = Just(value)
-
-  /**
-   * Maybe の flatMap 操作を実装します。
-   * - 入力が Just(a) の場合、関数 f を a に適用します。
-   * - 入力が Nothing の場合、結果は常に Nothing です。
-   */
-  override def flatMap[A, B](ma: Maybe[A])(f: A => Maybe[B]): Maybe[B] =
-    ma match {
-      case Just(a) => f(a) // 関数 f を適用
-      case Nothing => Nothing // Nothing を伝播させる
-    }
-
-  /**
-   * Maybe の map 操作も具体的に実装できます（Monad トレイトのデフォルト実装を使ってもOK）。
-   * - 入力が Just(a) の場合、関数 f を a に適用し、結果を Just でラップします。
-   * - 入力が Nothing の場合、結果は常に Nothing です。
-   */
-  override def map[A, B](ma: Maybe[A])(f: A => B): Maybe[B] =
-    ma match {
-      case Just(a) => Just(f(a)) // Just の中身に関数を適用して Just でラップ
-      case Nothing => Nothing    // Nothing を伝播させる
-    }
-}
-
 // --- 4. Maybe Monad の使用例 ---
 @main def runMaybeMonad(): Unit = {
   println("--- Maybe Monad Usage Example ---")

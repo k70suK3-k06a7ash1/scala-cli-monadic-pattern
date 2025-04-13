@@ -1,35 +1,4 @@
 import shared.*
-import scala.util.Try // Stateの例では直接使わないが、他の場所で使われる可能性
-
-// --- 1. State データ型の定義 ---
-case class State[S, +A](runState: S => (S, A)) {
-  def map[B](f: A => B): State[S, B] = State { initialState =>
-    val (finalState, resultA) = runState(initialState)
-    (finalState, f(resultA))
-  }
-
-  def flatMap[B](f: A => State[S, B]): State[S, B] = State { initialState =>
-    val (intermediateState, resultA) = runState(initialState)
-    val nextStateComputation = f(resultA)
-    nextStateComputation.runState(intermediateState)
-  }
-}
-
-// --- 2. State 用の Monad インスタンスとヘルパー関数 ---
-object StateMonad {
-  def stateMonad[S]: Monad[({ type lambda[+A] = State[S, A] })#lambda] =
-    new Monad[({ type lambda[+A] = State[S, A] })#lambda] {
-      override def pure[A](value: A): State[S, A] = State(s => (s, value))
-      override def flatMap[A, B](ma: State[S, A])(f: A => State[S, B]): State[S, B] =
-        ma.flatMap(f)
-    }
-
-  def pure[S, A](value: A): State[S, A] = State(s => (s, value))
-  def get[S]: State[S, S] = State(s => (s, s))
-  def set[S](newState: S): State[S, Unit] = State(_ => (newState, ()))
-  def modify[S](f: S => S): State[S, Unit] = State(s => (f(s), ()))
-  def inspect[S, A](f: S => A): State[S, A] = State(s => (s, f(s)))
-}
 
 // --- 3. State Monad の使用例 ---
 @main def runStateMonad(): Unit = {
