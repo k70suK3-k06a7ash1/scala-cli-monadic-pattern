@@ -32,7 +32,7 @@ jobs:
 
       # 3. Scala CLI を使ってコードを実行します
       - name: Run Scala script
-        run: scala-cli run .
-        
+        run: scala-cli run Products.scala
+
       - name: Test
         run: scala-cli test .
