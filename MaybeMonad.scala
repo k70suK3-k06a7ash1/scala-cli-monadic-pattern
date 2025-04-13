@@ -90,7 +90,7 @@ object MaybeMonad extends Monad[Maybe] {
 }
 
 // --- 4. Maybe Monad の使用例 ---
-@main def runMaybeMonadExample(): Unit = {
+@main def runMaybeMonad(): Unit = {
   println("--- Maybe Monad Usage Example ---")
 
   // Monad インスタンスの取得
