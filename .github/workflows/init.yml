@@ -28,19 +28,19 @@ jobs:
           scala-version: "3.3.x" # 使用する Scala のバージョン (例: 3.3.x)
 
       - name: Compile
-        run: scala-cli compile .
+        run: scala-cli compile ./src
 
       # 3. Products : functional programing
       - name: Run Scala script
-        run: scala-cli run src/monad/Products.scala
+        run: scala-cli run src/feature/Products.scala
 
       # 4. Maybe Monad
-      - name: Rust Scala Monad
-        run: scala-cli run src/monad/MaybeMonad.scala
+      # - name: Rust Scala Monad
+      #   run: scala-cli run src/monad/MaybeMonad.scala
 
       # 5. State Monad
       - name: Rust Scala Monad
-        run: scala-cli run src/features/StateMonad.scala
+        run: scala-cli run src/monad/StateMonad.scala
 
       - name: Test
         run: scala-cli test .
