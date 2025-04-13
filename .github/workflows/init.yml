@@ -30,9 +30,13 @@ jobs:
       - name: Compile
         run: scala-cli compile .
 
-      # 3. Scala CLI を使ってコードを実行します
+      # 3. Products : functional programing
       - name: Run Scala script
         run: scala-cli run Products.scala
+
+      # 4. Monad
+      - name: Rust Scala Monad
+        run: scala-cli run Monad.scala
 
       - name: Test
         run: scala-cli test .
