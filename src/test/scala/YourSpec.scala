@@ -1,3 +1,5 @@
+//> using test.dep org.scalatest::scalatest::3.2.18 // または最新の安定バージョン
+
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
