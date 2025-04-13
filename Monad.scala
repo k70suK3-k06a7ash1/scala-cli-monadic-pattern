@@ -148,7 +148,7 @@ object MaybeMonad extends Monad[Maybe] {
   println("You could define an implicit class like this:")
 
   // for式を使うための implicit class の例 (コメントアウト解除して試せます)
-  /*
+  
   implicit class MaybeOps[+A](ma: Maybe[A]) {
     // MaybeMonad の実装を利用する
     def flatMap[B](f: A => Maybe[B]): Maybe[B] = MaybeMonad.flatMap(ma)(f)
@@ -178,5 +178,5 @@ object MaybeMonad extends Monad[Maybe] {
     y <- maybeY // 実行されない
   } yield x + y + z // 実行されない
   println(s"for { x <- Just(10); z <- Nothing; ... } yield ...: $sumXZ") // Nothing
-  */
+
 }
