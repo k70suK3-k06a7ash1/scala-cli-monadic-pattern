@@ -1,42 +1,5 @@
-// ファイル名: StateMonadExample.scala (修正版)
-
+import shared.*
 import scala.util.Try // Stateの例では直接使わないが、他の場所で使われる可能性
-
-// --- (前提) Monad トレイト ---
-trait Monad[M[_]] {
-  def pure[A](value: A): M[A]
-  def flatMap[A, B](ma: M[A])(f: A => M[B]): M[B]
-  def map[A, B](ma: M[A])(f: A => B): M[B] = flatMap(ma)(a => pure(f(a)))
-}
-
-// --- (前提) Maybe 型 ---
-sealed trait Maybe[+A]
-case class Just[+A](value: A) extends Maybe[A]
-case object Nothing extends Maybe[Nothing]
-
-// --- Maybe 型に for式のためのメソッドを追加する implicit class ---
-// この implicit class を定義することで、Maybe 型の値に対して flatMap, map, withFilter が呼び出せるようになり、
-// for式が使えるようになります。
-implicit class MaybeOps[+A](ma: Maybe[A]) {
-
-  /** flatMap を Maybe 自身に実装 */
-  def flatMap[B](f: A => Maybe[B]): Maybe[B] = ma match {
-    case Just(a) => f(a)
-    case Nothing => Nothing
-  }
-
-  /** map を Maybe 自身に実装 */
-  def map[B](f: A => B): Maybe[B] = ma match {
-    case Just(a) => Just(f(a))
-    case Nothing => Nothing
-  }
-
-  /** withFilter を Maybe 自身に実装 (for式の if 節のため) */
-  def withFilter(p: A => Boolean): Maybe[A] = ma match {
-    case Just(a) if p(a) => ma // 条件を満たせばそのまま
-    case _ => Nothing        // 条件を満たさないか、元が Nothing なら Nothing
-  }
-}
 
 // --- 1. State データ型の定義 ---
 case class State[S, +A](runState: S => (S, A)) {

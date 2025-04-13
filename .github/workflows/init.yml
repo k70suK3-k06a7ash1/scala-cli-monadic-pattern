@@ -34,13 +34,13 @@ jobs:
       - name: Run Scala script
         run: scala-cli run src/feature/Products.scala
 
-      # 4. Maybe Monad
-      # - name: Rust Scala Monad
-      #   run: scala-cli run src/monad/MaybeMonad.scala
+      4. Maybe Monad
+      - name: Rust Scala Monad
+        run: scala-cli run src --main-class runMaybeMonad
 
       # 5. State Monad
       - name: Rust Scala Monad
-        run: scala-cli run src/monad/StateMonad.scala
+        run: scala-cli run src --main-class runStateMonad
 
       - name: Test
         run: scala-cli test .
