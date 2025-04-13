@@ -32,8 +32,6 @@ implicit class MaybeOps[+A](ma: Maybe[A]) {
   }
 }
 
-
-
 // --- Maybe 用の Monad インスタンスの実装 ---
 // Maybe 型コンストラクタに対する Monad トレイトの実装を提供します。
 object MaybeMonad extends Monad[Maybe] {
