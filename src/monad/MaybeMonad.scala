@@ -58,18 +58,6 @@ import shared.*
   println("Our current `Maybe` type doesn't have them directly.")
   println("You could define an implicit class like this:")
 
-  // for式を使うための implicit class の例 (コメントアウト解除して試せます)
-  
-  implicit class MaybeOps[+A](ma: Maybe[A]) {
-    // MaybeMonad の実装を利用する
-    def flatMap[B](f: A => Maybe[B]): Maybe[B] = MaybeMonad.flatMap(ma)(f)
-    def map[B](f: A => B): Maybe[B] = MaybeMonad.map(ma)(f)
-    def withFilter(p: A => Boolean): Maybe[A] = ma match {
-      case Just(a) if p(a) => ma
-      case _ => Nothing
-    }
-  }
-
   println("\n--- Using for-comprehension with implicit class ---")
 
   val maybeX: Maybe[Int] = Just(10)
